@@ -1,1 +1,1 @@
-# SpringMVCLearn and Mybatis
+# SpringMVCandMybatis Learn
