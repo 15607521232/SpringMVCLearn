@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.GuangGuangLi.dao.UserDao">
+    <!--添加用户-杨月娥-2019年1月5日-->
+    <insert id="addUser" parameterType="com.GuangGuangLi.entity.UserInfo">
+      insert into USER_SSM values(#{id},#{name},#{age})
+
+    </insert>
+
+    <select id="getUser" resultType="com.GuangGuangLi.entity.UserInfo">
+        SELECT  * FROM  USER_SSM WHERE id=#{id}
+    </select>
+
+</mapper>
