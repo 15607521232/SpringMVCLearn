@@ -15,4 +15,23 @@ public class UserserviceImpl implements IuserService {
     public boolean addUser(UserInfo user) {
         return userDao.addUser(user);
     }
+
+    public UserInfo getUserInfoByName(String username){
+            return userDao.getUserInfoByName(username);
+    }
+
+
+    public UserInfo getUserInfoById(int id){
+        return userDao.getUserInfoById(id);
+    }
+
+    @Override
+    public boolean updateUserInfoById(UserInfo userInfo) {
+        return userDao.updateUserInfoById(userInfo);
+    }
+
+    @Override
+    public boolean deleteUserById(int id) {
+        return userDao.deleteUserById(id);
+    }
 }

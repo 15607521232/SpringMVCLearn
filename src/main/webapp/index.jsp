@@ -21,9 +21,11 @@
 
 <body>
 <h1>SSM整合</h1>
+
 <form action="${pageContext.request.contextPath }/user/addUser" method="post">
     用户名：<input name="name"/> <br/>
-    用户年龄<input name="age"/><br/>
+    用户性别<input name="sex"/><br/>
+    用户地址<input name="address"/><br/>
     <input type="submit" value="save"/>
 </form>
 </body>

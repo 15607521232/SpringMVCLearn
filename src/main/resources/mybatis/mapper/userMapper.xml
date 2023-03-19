@@ -4,12 +4,24 @@
 <mapper namespace="com.GuangGuangLi.dao.UserDao">
     <!--添加用户-杨月娥-2019年1月5日-->
     <insert id="addUser" parameterType="com.GuangGuangLi.entity.UserInfo">
-      insert into USER_SSM values(#{id},#{name},#{age})
+      insert into USER values(#{id},#{username},#{birthday},#{sex},#{address})
 
     </insert>
 
-    <select id="getUser" resultType="com.GuangGuangLi.entity.UserInfo">
-        SELECT  * FROM  USER_SSM WHERE id=#{id}
+    <select id="getUserInfoByName" parameterType="java.lang.String" resultType="com.GuangGuangLi.entity.UserInfo">
+        SELECT  * FROM  USER WHERE username LIKE '%${value}%'
     </select>
+
+    <select id="getUserInfoById" parameterType="int" resultType="com.GuangGuangLi.entity.UserInfo">
+        SELECT  * FROM  USER WHERE  id= #{id}
+    </select>
+
+    <update id="updateUserInfoById" parameterType="com.GuangGuangLi.entity.UserInfo">
+        UPDATE USER SET username=#{username},birthday=#{birthday},sex=#{sex},address=#{address} where id=#{id};
+    </update>
+
+    <delete id="deleteUserById" parameterType="int">
+        DELETE FROM USER WHERE id= #{id}
+    </delete>
 
 </mapper>
