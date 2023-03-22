@@ -2,6 +2,7 @@ package com.GuangGuangLi.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class UserInfo  implements Serializable {
 
@@ -10,6 +11,8 @@ public class UserInfo  implements Serializable {
     private Date birthday;
     private String sex;
     private String address;
+
+    private List<Orders> ordersList;
 
     public int getId() {
         return id;
@@ -51,6 +54,14 @@ public class UserInfo  implements Serializable {
         this.address = address;
     }
 
+    public List<Orders> getOrdersList() {
+        return ordersList;
+    }
+
+    public void setOrdersList(List<Orders> ordersList) {
+        this.ordersList = ordersList;
+    }
+
     @Override
     public String toString() {
         return "UserInfo{" +
@@ -59,6 +70,7 @@ public class UserInfo  implements Serializable {
                 ", birthday=" + birthday +
                 ", sex='" + sex + '\'' +
                 ", address='" + address + '\'' +
+                ", ordersList=" + ordersList +
                 '}';
     }
 }

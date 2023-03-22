@@ -1,6 +1,7 @@
 package com.GuangGuangLi.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class Orders {
 
@@ -13,6 +14,10 @@ public class Orders {
 
     //添加UserInfo的属性
     private UserInfo userInfo;
+
+
+    //添加订单明细
+    private List<Orderdetail> orderdetails;
 
     public int getId() {
         return id;
@@ -62,6 +67,15 @@ public class Orders {
         this.userInfo = userInfo;
     }
 
+    public List<Orderdetail> getOrderdetails() {
+        return orderdetails;
+    }
+
+    public void setOrderdetails(List<Orderdetail> orderdetails) {
+        this.orderdetails = orderdetails;
+    }
+
+
     @Override
     public String toString() {
         return "Orders{" +
@@ -71,6 +85,7 @@ public class Orders {
                 ", createtime=" + createtime +
                 ", note='" + note + '\'' +
                 ", userInfo=" + userInfo +
+                ", orderdetails=" + orderdetails +
                 '}';
     }
 }

@@ -3,6 +3,7 @@ package com.GuangGuangLi.service.impl;
 import com.GuangGuangLi.dao.OrderDao;
 import com.GuangGuangLi.entity.Orders;
 import com.GuangGuangLi.entity.OrdersCustom;
+import com.GuangGuangLi.entity.UserInfo;
 import com.GuangGuangLi.service.IorderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,4 +27,16 @@ public class OrderserviceImpl implements IorderService {
     public List<Orders> findOrdersUserResultMap() {
         return orderDao.findOrdersUserResultMap();
     }
+
+    @Override
+    public List<Orders> findOrdersAndOrderDetailResultMap() {
+        return orderDao.findOrdersAndOrderDetailResultMap();
+    }
+
+    @Override
+    public List<UserInfo> findUserAndItemsResultMap() {
+        return orderDao.findUserAndItemsResultMap();
+    }
+
+
 }
