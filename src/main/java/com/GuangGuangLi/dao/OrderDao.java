@@ -1,5 +1,6 @@
 package com.GuangGuangLi.dao;
 
+import com.GuangGuangLi.entity.Items;
 import com.GuangGuangLi.entity.Orders;
 import com.GuangGuangLi.entity.OrdersCustom;
 import com.GuangGuangLi.entity.UserInfo;
@@ -16,4 +17,6 @@ public interface OrderDao {
     List<Orders> findOrdersAndOrderDetailResultMap();
 
     List<UserInfo> findUserAndItemsResultMap();
+
+    List<Items> findItems(int id);
 }

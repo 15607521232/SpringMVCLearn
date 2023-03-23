@@ -1,6 +1,7 @@
 package com.GuangGuangLi.service.impl;
 
 import com.GuangGuangLi.dao.OrderDao;
+import com.GuangGuangLi.entity.Items;
 import com.GuangGuangLi.entity.Orders;
 import com.GuangGuangLi.entity.OrdersCustom;
 import com.GuangGuangLi.entity.UserInfo;
@@ -36,6 +37,11 @@ public class OrderserviceImpl implements IorderService {
     @Override
     public List<UserInfo> findUserAndItemsResultMap() {
         return orderDao.findUserAndItemsResultMap();
+    }
+
+    @Override
+    public List<Items> findItems(int id) {
+        return orderDao.findItems(id);
     }
 
 
