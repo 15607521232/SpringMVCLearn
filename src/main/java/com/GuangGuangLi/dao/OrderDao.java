@@ -1,9 +1,6 @@
 package com.GuangGuangLi.dao;
 
-import com.GuangGuangLi.entity.Items;
-import com.GuangGuangLi.entity.Orders;
-import com.GuangGuangLi.entity.OrdersCustom;
-import com.GuangGuangLi.entity.UserInfo;
+import com.GuangGuangLi.entity.*;
 
 import java.util.List;
 
@@ -18,5 +15,7 @@ public interface OrderDao {
 
     List<UserInfo> findUserAndItemsResultMap();
 
-    List<Items> findItems(int id);
+    ItemsCustom findItems(int id);
+
+    List<ItemsCustom> queryItems(ItemsQueryVo itemsQueryVo);
 }

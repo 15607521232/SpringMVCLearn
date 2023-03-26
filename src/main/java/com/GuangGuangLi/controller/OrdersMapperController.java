@@ -5,12 +5,13 @@ import com.GuangGuangLi.entity.*;
 import com.GuangGuangLi.service.IorderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping(value = "/orders")
 @Controller
@@ -174,14 +175,79 @@ public class OrdersMapperController {
     @RequestMapping(value = "/findItems",method = RequestMethod.GET)
     public ModelAndView findItems(@RequestParam (value ="id") int id){
 
-        List<Items> itemsList = iorderService.findItems(id);
+        ItemsCustom itemsCustom = iorderService.findItems(id);
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("itemsList",itemsList);
+        modelAndView.addObject("itemsCustom",itemsCustom);
         return modelAndView;
 
 
     }
+
+    /**
+     * 添加商品分类
+     *
+     * itemsType表示最终将方法返回值放在request中的key
+     */
+    @ModelAttribute(value = "itemsType")
+    public Map<String,String> getItemsType(){
+        Map<String,String> itemsType = new HashMap<>();
+        itemsType.put("101","数码");
+        itemsType.put("102","母婴");
+        return itemsType;
+
+    }
+
+
+    /**
+     * 商品查询controller方法中实现商品查询条件传入。
+     * 请求接口 包装类型的pojo参数类型绑定
+     *
+     *
+     * @param itemsQueryVo
+     * @return
+     */
+    @RequestMapping(value = "/queryItems")
+    public ModelAndView queryItems(ItemsQueryVo itemsQueryVo){
+        List<ItemsCustom> itemsCustomList = iorderService.queryItems(itemsQueryVo);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("itemsCustomList",itemsCustomList);
+        modelAndView.setViewName("orders/findItems");
+        return modelAndView;
+
+    }
+
+    /**
+     *  数组绑定
+     *  商品批量删除，用户在页面选择多个商品，批量删除
+     */
+
+    @RequestMapping(value = "/deleteItems")
+    public String deleteItems(Integer[] items_id){
+        //方法层暂不实现
+        return "success";
+    }
+
+    //使用RESTful形式查询商品信息 输出json格式数据
+
+    /**
+     *
+     * @param id
+     * @return
+     * /jsonItemsView/{id}中的id表示占位符，通过@PathVariable获取占位符中的参数，如果占位符中的名称和形参名一致，在@PathVariable可以不指定名称
+     */
+
+    @RequestMapping("/jsonItemsView/{id}")
+    public @ResponseBody ItemsCustom jsonItemsView(@PathVariable("id") int id){
+        ItemsCustom itemsCustom = iorderService.findItems(id);
+        return itemsCustom;
+
+    }
+
+
+
+
+
 
 
 
