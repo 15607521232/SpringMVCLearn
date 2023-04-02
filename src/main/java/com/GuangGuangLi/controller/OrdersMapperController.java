@@ -1,14 +1,20 @@
 package com.GuangGuangLi.controller;
 
 
+import com.GuangGuangLi.controller.validation.ValidGroup1;
 import com.GuangGuangLi.entity.*;
+import com.GuangGuangLi.exception.CustomException;
 import com.GuangGuangLi.service.IorderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -225,7 +231,7 @@ public class OrdersMapperController {
     @RequestMapping(value = "/deleteItems")
     public String deleteItems(Integer[] items_id){
         //方法层暂不实现
-        return "success";
+        return "items/success";
     }
 
     //使用RESTful形式查询商品信息 输出json格式数据
@@ -241,6 +247,70 @@ public class OrdersMapperController {
     public @ResponseBody ItemsCustom jsonItemsView(@PathVariable("id") int id){
         ItemsCustom itemsCustom = iorderService.findItems(id);
         return itemsCustom;
+
+    }
+
+    /**
+     * 商品信息修改页面
+     */
+    @RequestMapping(value = "/editItems")
+    public String editItems(Model model,@RequestParam(value="id" ,required = true) Integer items_id) throws CustomException {
+        //调用service根据商品id查询商品信息
+        ItemsCustom itemsCustom = iorderService.findItems(items_id);
+
+        //判断商品是否为空，根据id没有差选到商品，抛出异常，提示用户商品信息不存在
+        if(itemsCustom == null){
+            throw new CustomException("修改的商品信息不存在");
+        }
+
+        //商品信息插入到形参
+        model.addAttribute("itemsCustom",itemsCustom);
+
+        //返回逻辑试图名称
+        return "/orders/editItems";
+
+
+    }
+
+    /**
+     * 商品信息修改批量提交
+     */
+    @RequestMapping(value = "/editItemsSubmit")
+    public String editItemsSubmit( Model model, Integer id, @Validated(value = {ValidGroup1.class}) ItemsCustom itemsCustom, BindingResult bindingResult){
+
+        //获取校验错误信息
+        if(bindingResult.hasErrors()){
+            //输出错误信息
+            List<ObjectError> allErrors = bindingResult.getAllErrors();
+
+            for (ObjectError objectError:allErrors){
+                System.out.println(objectError.getDefaultMessage());
+            }
+
+            //将错误信息传到页面
+          model.addAttribute("allErrors",allErrors);
+          //可以直接使用model将提交pojo回显到页面
+          model.addAttribute("items",itemsCustom);
+
+          //出错重回到商品修改页面
+          return "/orders/editItems";
+
+
+        }
+
+
+        iorderService.updateItems(id,itemsCustom);
+
+        //重定向到商品查询列表页面
+        //return "redirect:queryItems.action";
+
+        //页面转发
+        //return "forward:queryItems.action";
+
+        return "/items/success";
+
+
+
 
     }
 

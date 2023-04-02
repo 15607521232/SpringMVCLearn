@@ -32,9 +32,9 @@ public class UserController {
 
 
         if (iuserService.addUser(userInfo)){
-            return "success";
+            return "items/success";
         }else {
-            return "error";
+            return "items/error";
         }
     }
 
@@ -63,9 +63,9 @@ public class UserController {
         userInfo.setSex("男");
         userInfo.setAddress("长安");
         if(iuserService.updateUserInfoById(userInfo)){
-            return "success";
+            return "items/success";
         }else {
-            return "error";
+            return "items/error";
         }
 
     }

@@ -1,21 +1,28 @@
 package com.GuangGuangLi.entity;
 
+import com.GuangGuangLi.controller.validation.ValidGroup1;
+
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class Items {
 
-    private int id;
+    private Integer id;
+
+    //添加校验
+    @Size(min = 3,max = 30, message="{items.name.length.error}",groups = {ValidGroup1.class})
     private String name;
     private Float price;
     private String detail;
     private String pic;
     private Date createtime;
 
-    public int getId() {
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -18,4 +18,6 @@ public interface OrderDao {
     ItemsCustom findItems(int id);
 
     List<ItemsCustom> queryItems(ItemsQueryVo itemsQueryVo);
+
+    int updateItems(Items items);
 }

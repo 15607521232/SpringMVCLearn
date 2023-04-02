@@ -18,4 +18,6 @@ public interface IorderService {
     ItemsCustom findItems(int id);
 
     List<ItemsCustom> queryItems(ItemsQueryVo itemsQueryVo);
+
+    void updateItems(Integer id,ItemsCustom itemsCustom);
 }

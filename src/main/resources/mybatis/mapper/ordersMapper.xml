@@ -173,5 +173,16 @@
     </select>
 
 
+    <update id="updateItems" parameterType="com.GuangGuangLi.entity.Items" >
+        update items
+        set name = #{name},
+            price = #{price},
+            pic = #{pic},
+            createtime = #{createtime},
+            detail = #{detail}
+        where id = #{id}
+    </update>
+
+
 
 </mapper>
