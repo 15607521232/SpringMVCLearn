@@ -7,15 +7,15 @@ import java.util.Date;
 
 public class Items {
 
-    private Integer id;
+    public Integer id;
 
     //添加校验
     @Size(min = 3,max = 30, message="{items.name.length.error}",groups = {ValidGroup1.class})
-    private String name;
-    private Float price;
-    private String detail;
-    private String pic;
-    private Date createtime;
+    public String name;
+    public Float price;
+    public String detail;
+    public String pic;
+    public Date createtime;
 
 
     public Integer getId() {

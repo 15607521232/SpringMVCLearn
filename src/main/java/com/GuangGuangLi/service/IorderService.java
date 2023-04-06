@@ -15,7 +15,7 @@ public interface IorderService {
 
     List<UserInfo> findUserAndItemsResultMap();
 
-    ItemsCustom findItems(int id);
+    ItemsCustom findItems(int items_id);
 
     List<ItemsCustom> queryItems(ItemsQueryVo itemsQueryVo);
 

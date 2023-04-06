@@ -179,12 +179,13 @@ public class OrdersMapperController {
     }
 
     @RequestMapping(value = "/findItems",method = RequestMethod.GET)
-    public ModelAndView findItems(@RequestParam (value ="id") int id){
+    public ModelAndView findItems(@RequestParam (value ="items_id") int items_id){
 
-        ItemsCustom itemsCustom = iorderService.findItems(id);
+        ItemsCustom itemsCustom = iorderService.findItems(items_id);
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("itemsCustom",itemsCustom);
+        modelAndView.setViewName("/orders/findItems");
         return modelAndView;
 
 
@@ -243,12 +244,12 @@ public class OrdersMapperController {
      * /jsonItemsView/{id}中的id表示占位符，通过@PathVariable获取占位符中的参数，如果占位符中的名称和形参名一致，在@PathVariable可以不指定名称
      */
 
-    @RequestMapping("/jsonItemsView/{id}")
-    public @ResponseBody ItemsCustom jsonItemsView(@PathVariable("id") int id){
-        ItemsCustom itemsCustom = iorderService.findItems(id);
-        return itemsCustom;
-
-    }
+//    @RequestMapping("/jsonItemsView/{id}")
+//    public @ResponseBody ItemsCustom jsonItemsView(@PathVariable("id") int id){
+//        ItemsCustom itemsCustom = iorderService.findItems(id);
+//        return itemsCustom;
+//
+//    }
 
     /**
      * 商品信息修改页面
@@ -274,9 +275,19 @@ public class OrdersMapperController {
 
     /**
      * 商品信息修改批量提交
+     *
+     *
+     *
+     * itemsCustom包装类中的参数是由页面editItems.jsp传递过来的，其中形式参数的绑定 jsp中的name要和pojo中参数的对应关系对应正确
+     *
+     * 数据回显
+     * ModelAttribute可以指定pojo回显到页面在request中的key
      */
-    @RequestMapping(value = "/editItemsSubmit")
-    public String editItemsSubmit( Model model, Integer id, @Validated(value = {ValidGroup1.class}) ItemsCustom itemsCustom, BindingResult bindingResult){
+    @RequestMapping(value = "/editItemsSubmit",method = RequestMethod.POST)
+    public String editItemsSubmit(Model model, Integer id,
+                                  @ModelAttribute("itemsCustom")
+                                  @Validated(value = {ValidGroup1.class}) ItemsCustom itemsCustom, BindingResult bindingResult){
+//    public String editItemsSubmit(Model model, Integer id,HttpServletRequest request, ItemsCustom itemsCustom){
 
         //获取校验错误信息
         if(bindingResult.hasErrors()){
@@ -289,11 +300,12 @@ public class OrdersMapperController {
 
             //将错误信息传到页面
           model.addAttribute("allErrors",allErrors);
-          //可以直接使用model将提交pojo回显到页面
-          model.addAttribute("items",itemsCustom);
+          //可以直接使用model将提交pojo回显到页面  页面上pojo的类型是itemsCustom
+          model.addAttribute("itemsCustom",itemsCustom);
 
           //出错重回到商品修改页面
           return "/orders/editItems";
+
 
 
         }

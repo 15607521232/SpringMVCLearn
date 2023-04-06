@@ -15,9 +15,9 @@ public interface OrderDao {
 
     List<UserInfo> findUserAndItemsResultMap();
 
-    ItemsCustom findItems(int id);
+    ItemsCustom findItems(int items_id);
 
     List<ItemsCustom> queryItems(ItemsQueryVo itemsQueryVo);
 
-    int updateItems(Items items);
+    int updateItems(ItemsCustom itemsCustom);
 }

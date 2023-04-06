@@ -173,7 +173,7 @@
     </select>
 
 
-    <update id="updateItems" parameterType="com.GuangGuangLi.entity.Items" >
+    <update id="updateItems" parameterType="com.GuangGuangLi.entity.ItemsCustom" >
         update items
         set name = #{name},
             price = #{price},

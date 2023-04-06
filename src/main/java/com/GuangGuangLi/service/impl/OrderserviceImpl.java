@@ -37,8 +37,8 @@ public class OrderserviceImpl implements IorderService {
     }
 
     @Override
-    public ItemsCustom findItems(int id) {
-        return orderDao.findItems(id);
+    public ItemsCustom findItems(int items_id) {
+        return orderDao.findItems(items_id);
     }
 
     @Override
