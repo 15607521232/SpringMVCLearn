@@ -18,7 +18,7 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
         if(e instanceof CustomException){
             customException = (CustomException) e;
         }else {
-            customException = new CustomException("位置错误");
+            customException = new CustomException("未知错误");
         }
 
         //错误信息
@@ -27,13 +27,13 @@ public class CustomExceptionResolver implements HandlerExceptionResolver {
         ModelAndView modelAndView = new ModelAndView();
 
         //将错误信息传到页面
-        modelAndView.addObject("customException",customException);
+        modelAndView.addObject("message",message);
 
         //指向错误页面
-        modelAndView.setViewName("/exception/errors");
+        modelAndView.setViewName("items/error");
 
 
 
-        return null;
+        return modelAndView;
     }
 }

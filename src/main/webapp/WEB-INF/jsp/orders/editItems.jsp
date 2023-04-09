@@ -21,7 +21,7 @@
 
 
 <%--enctype="multipart/form-data" 代表支持上传图片--%>
-<form id="itemForm" action="${pageContext.request.contextPath }/orders/editItemsSubmit" method="post">
+<form id="itemForm" action="${pageContext.request.contextPath }/orders/editItemsSubmit" method="post" enctype="multipart/form-data">
   <input type="hidden" name="id" value="${itemsCustom.id }"/>
   修改商品信息：
   <table width="100%" border=1>
@@ -44,7 +44,7 @@
           <img src="/pic/${itemsCustom.pic}" width=100 height=100/>
           <br/>
         </c:if>
-        <input type="file"  name="pic"/>
+        <input type="file"  name="items_pic"/>
       </td>
     </tr>
     <tr>

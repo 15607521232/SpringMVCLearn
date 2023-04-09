@@ -12,12 +12,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @RequestMapping(value = "/orders")
 @Controller
@@ -185,7 +189,7 @@ public class OrdersMapperController {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("itemsCustom",itemsCustom);
-        modelAndView.setViewName("/orders/findItems");
+        modelAndView.setViewName("orders/findItems");
         return modelAndView;
 
 
@@ -285,8 +289,12 @@ public class OrdersMapperController {
      */
     @RequestMapping(value = "/editItemsSubmit",method = RequestMethod.POST)
     public String editItemsSubmit(Model model, Integer id,
+                                  HttpServletRequest request,
                                   @ModelAttribute("itemsCustom")
-                                  @Validated(value = {ValidGroup1.class}) ItemsCustom itemsCustom, BindingResult bindingResult){
+                                  @Validated(value = {ValidGroup1.class}) ItemsCustom itemsCustom,
+                                  BindingResult bindingResult,
+                                  MultipartFile items_pic //接收商品图片
+                                  ) throws IOException {
 //    public String editItemsSubmit(Model model, Integer id,HttpServletRequest request, ItemsCustom itemsCustom){
 
         //获取校验错误信息
@@ -309,7 +317,24 @@ public class OrdersMapperController {
 
 
         }
+        //原始名称
+        String originalFileName = items_pic.getOriginalFilename();
 
+        //上传图片
+        if(items_pic != null && originalFileName != null && originalFileName.length()>0){
+
+            //存储图片路径
+            String pic_path = "F:\\setUp\\uploadTemp\\";
+
+            //新的图片名称
+            String newFileName = UUID.randomUUID() + originalFileName.substring(originalFileName.lastIndexOf("."));
+            File newFile = new File(pic_path + newFileName);
+
+            //将内存中的数据写入磁盘
+            items_pic.transferTo(newFile);
+
+            itemsCustom.setPic(newFileName);
+        }
 
         iorderService.updateItems(id,itemsCustom);
 
