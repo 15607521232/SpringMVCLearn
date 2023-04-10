@@ -239,21 +239,6 @@ public class OrdersMapperController {
         return "items/success";
     }
 
-    //使用RESTful形式查询商品信息 输出json格式数据
-
-    /**
-     *
-     * @param id
-     * @return
-     * /jsonItemsView/{id}中的id表示占位符，通过@PathVariable获取占位符中的参数，如果占位符中的名称和形参名一致，在@PathVariable可以不指定名称
-     */
-
-//    @RequestMapping("/jsonItemsView/{id}")
-//    public @ResponseBody ItemsCustom jsonItemsView(@PathVariable("id") int id){
-//        ItemsCustom itemsCustom = iorderService.findItems(id);
-//        return itemsCustom;
-//
-//    }
 
     /**
      * 商品信息修改页面
@@ -350,6 +335,55 @@ public class OrdersMapperController {
 
 
     }
+
+    /**
+     * 请求是json 输出是json
+     *
+     * @RequestBody将请求的商品信息的json串转成itemsCustom对象
+     * @ResponseBody将itemsCustom转成json输出
+     * @param itemsCustom
+     * @return
+     */
+    @RequestMapping("/requestJson")
+    public @ResponseBody ItemsCustom requestJson(@RequestBody ItemsCustom itemsCustom){
+
+        //@ResponseBody将itemsCustom转成json输出
+        return itemsCustom;
+    }
+
+    /**
+     * 请求是key/value 输出是json
+     * @param itemsCustom
+     * @return
+     */
+    @RequestMapping("/requestKV")
+    public @ResponseBody ItemsCustom requestKV(ItemsCustom itemsCustom){
+
+        //@ResponseBody将itemsCustom转成json输出
+        return itemsCustom;
+    }
+
+
+
+
+
+
+
+    //使用RESTful形式查询商品信息 输出json格式数据
+
+    /**
+     *
+     * @param id
+     * @return
+     * /jsonItemsView/{id}中的id表示占位符，通过@PathVariable获取占位符中的参数，如果占位符中的名称和形参名一致，在@PathVariable可以不指定名称
+     */
+
+//    @RequestMapping("/jsonItemsView/{id}")
+//    public @ResponseBody ItemsCustom jsonItemsView(@PathVariable("id") int id){
+//        ItemsCustom itemsCustom = iorderService.findItems(id);
+//        return itemsCustom;
+//
+//    }
 
 
 
