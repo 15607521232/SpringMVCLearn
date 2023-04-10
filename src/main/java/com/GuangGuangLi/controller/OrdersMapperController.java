@@ -378,12 +378,12 @@ public class OrdersMapperController {
      * /jsonItemsView/{id}中的id表示占位符，通过@PathVariable获取占位符中的参数，如果占位符中的名称和形参名一致，在@PathVariable可以不指定名称
      */
 
-//    @RequestMapping("/jsonItemsView/{id}")
-//    public @ResponseBody ItemsCustom jsonItemsView(@PathVariable("id") int id){
-//        ItemsCustom itemsCustom = iorderService.findItems(id);
-//        return itemsCustom;
-//
-//    }
+    @RequestMapping("/jsonItemsView/{id}")
+    public @ResponseBody ItemsCustom jsonItemsView(@PathVariable("id") int id){
+        ItemsCustom itemsCustom = iorderService.findItems(id);
+        return itemsCustom;
+
+    }
 
 
 
