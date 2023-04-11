@@ -28,7 +28,7 @@
 <body>
 当前用户：${username }，
 <c:if test="${username!=null }">
-    <a href="${pageContext.request.contextPath }/logout.action">退出</a>
+    <a href="${pageContext.request.contextPath }/logout">退出</a>
 </c:if>
 <form name="itemsForm" action="${pageContext.request.contextPath }/orders/queryItems" method="post">
     查询条件：

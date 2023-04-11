@@ -88,5 +88,12 @@ http://www.springframework.org/schema/mvc
         </property>
     </bean>
 
+    <!--    拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**/"/>
+            <bean class="com.GuangGuangLi.interceptor.LoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>
